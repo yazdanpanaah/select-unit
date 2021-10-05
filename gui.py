@@ -51,9 +51,6 @@ class ProgramGui:
         self.main_win.destroy()
         
         
-    
-    
-        
     def back_to_main(self):
         #back to the main menu
         self.register_win.destroy()
@@ -73,11 +70,6 @@ class ProgramGui:
         obj3.mainloop()
        
    
-        
-       
-       
-        
-        
     def register(self):
         self.main_win.destroy()
         self.register_win=register_win=Tk()
@@ -97,10 +89,7 @@ class ProgramGui:
         l3.place(x=150,y=240)
         
         
-        
-        
         #combobox
-        
         # label
         combo_lab = ttk.Label(register_win, text = "Select your position :",font = ("Times New Roman", 10))
         combo_lab.place(x=70,y=320)
@@ -135,48 +124,23 @@ class ProgramGui:
         self.ad_e3 = ad_e3= Entry(register_win,show="*",width = 40,textvariable=self.repit_pass)
         ad_e3.place(x=120,y=280)
     
-        #button
-        b=Button(register_win,text="Submit", bg='black', fg='white',command=self.add_file,width=15)
+        #button to get users input and add it to file
+        b=Button(register_win,text="Submit", bg='black', fg='white',command=lambda:[self.get_var(),bc.code_generator(self.username1,self.password1,self.repit_pass1,self.position1)],width=15)
         b.place(x=170, y=380)
         
         #back button
         back_butt = Button(register_win, text='back',bg='black' ,fg='white',command=self.back_to_win1,width=15)
         back_butt.place(x=170,y=420)
         
-        
-         
+                      
+    def get_var(self):
+        self.position1 = self.position.get()
+        self.username1 = self.username.get()
+        self.password1 = self.password.get()
+        self.repit_pass1 = self.repit_pass.get()
         
                 
-    def add_file(self):
-        code_generator = random.randint(10000000, 99999999)
-        position = self.position.get()
-        username = self.username.get()
-        password = self.password.get()
-        repit_pass = self.repit_pass.get()
-        if (username and password and repit_pass and position):
-            if password == repit_pass:
-                if position == 'teacher':
-                    code = 'T'+str(code_generator)
-                elif position == 'admin':
-                    code = 'A'+str(code_generator)
-                else:
-                    code = 'S'+str(code_generator)
-                    
-                    
-                obj = bc.Register(username,password)
-                obj.add_to_file(code)
-                messagebox.showinfo(title='successful',message = [code,obj.username])
-                
-            else:
-                 messagebox.showerror(title='Not match', message='the repited password is not match')
-        else:
-             messagebox.showerror(title='empty', message='no data to add')
-                
-            
-            
-        
-        
-        
+              
     def login_menu(self):
         self.main_win.destroy()
         self.login_win1=login_win1=Tk()
@@ -214,15 +178,11 @@ class ProgramGui:
     def login(self):
          input_username = self.input_username.get()
          input_password = self.input_password.get()
-         obj2 = bc.Register(input_username,input_password)
-         
-         if obj2.check_login(input_username,input_password):
-             with open('university-data.csv','r') as file:
-                reader = csv.DictReader(file)
-                data_list = list(reader)
-                for dic in data_list:
-                    if dic['username'] == input_username and dic['code'][0] == 'S':
-                            #student_menu
+         obj2 = bc.User()
+         if obj2.check_login(input_username,input_password) == True:
+             if obj2.check_position(input_username) == 'student':
+                       
+#==============================StudentMenu======================================
                             self.login_win1.destroy()
                             self.student_win = student_win= Tk()
                             self.student_win.minsize(1000, 1000)
@@ -246,32 +206,59 @@ class ProgramGui:
                             logout.place(x=100,y=250)
                             
                         
-
+#==============================AdminMenu======================================
                         
-                    elif dic['username'] == input_username and dic['code'][0] == 'A':
-                            self.login_win1.destroy()
-                            self.admin_win = admin_win = Tk()
-                            self.admin_win.minsize(1000, 1000)
-                            admin_win.title('login menu2')
-                            admin_win.config(background='orange')
+             elif (obj2.check_position(input_username)) == 'admin':
+                 
+                 self.login_win1.destroy()
+                 self.admin_win = admin_win = Tk()
+                 self.admin_win.minsize(1000, 1000)
+                 admin_win.title('login menu2')
+                 admin_win.config(background='orange')
                             
-                            #labels
-                            header = Label(admin_win, text=['hello',input_username,'welcome to admin panel'], bg='black',fg='white', font=("Courier","30","bold"))
-                            header.grid(row=0, column=0)
+                 #labels
+                 header = Label(admin_win, text=['hello',input_username,'welcome to admin panel'], bg='black',fg='white', font=("Courier","30","bold"))
+                 header.grid(row=0, column=0)
                             
                             
-                            #buttons
-                            show_butt = Button(admin_win, text='see subjects',bg='lightyellow2', fg='black',font ='20',width =30,command=self.show_sub)
-                            search_butt = Button(admin_win,text ='search subjects',bg ='lightyellow2', fg ='black',font ='20',width =30,command=self.search_2)
-                            num_subject_butt = Button(admin_win, text='show number of units',bg ='lightyellow2', fg ='black',font ='20',width =30,command=self.all_unit2)
-                            logout = Button(admin_win,text='logout',bg ='black', fg ='white',font ='10',width =30,command=self.logout2)
-                            add_subject = Button(admin_win,text='add subject',bg ='black', fg ='white',font ='10',width =30,command=self.add_subject)
+                 #buttons
+                 show_butt = Button(admin_win, text='see subjects',bg='lightyellow2', fg='black',font ='20',width =30,command=self.show_sub)
+                 search_butt = Button(admin_win,text ='search subjects',bg ='lightyellow2', fg ='black',font ='20',width =30,command=self.search_2)
+                 num_subject_butt = Button(admin_win, text='show number of units',bg ='lightyellow2', fg ='black',font ='20',width =30,command=self.all_unit2)
+                 logout = Button(admin_win,text='logout',bg ='black', fg ='white',font ='10',width =30,command=self.logout2)
+                 add_subject = Button(admin_win,text='add subject',bg ='black', fg ='white',font ='10',width =30,command=self.add_subject)
                             
-                            show_butt.place(x=100,y=100)
-                            search_butt.place(x=100,y=150)
-                            num_subject_butt.place(x=100,y=200)
-                            add_subject.place(x=100,y=250)
-                            logout.place(x=100,y=300)
+                 show_butt.place(x=100,y=100)
+                 search_butt.place(x=100,y=150)
+                 num_subject_butt.place(x=100,y=200)
+                 add_subject.place(x=100,y=250)
+                 logout.place(x=100,y=300)
+#==============================TeacherMenu======================================
+             else:
+                 
+                 self.login_win1.destroy()
+                 self.teacher_win = teacher_win = Tk()
+                 self.teacher_win.minsize(1000, 1000)
+                 teacher_win.title('login menu2')
+                 teacher_win.config(background='orange')
+                            
+                 #labels
+                 header = Label(teacher_win, text=f'hello {input_username}  welcome to teacher panel', bg='black',fg='white', font=("Courier","30","bold"))
+                 header.grid(row=0, column=0)
+                            
+                            
+                 #buttons
+                 show_butt = Button(teacher_win, text='see subjects',bg='lightyellow2', fg='black',font ='20',width =30,command=self.show_sub)
+                 search_butt = Button(teacher_win,text ='search subjects',bg ='lightyellow2', fg ='black',font ='20',width =30,command=self.search_2)
+                 num_subject_butt = Button(teacher_win, text='show number of units',bg ='lightyellow2', fg ='black',font ='20',width =30,command=self.all_unit2)
+                 logout = Button(teacher_win,text='logout',bg ='black', fg ='white',font ='10',width =30,command=self.logout2)
+                 add_subject = Button(teacher_win,text='add subject',bg ='black', fg ='white',font ='10',width =30,command=self.add_subject)
+                            
+                 show_butt.place(x=100,y=100)
+                 search_butt.place(x=100,y=150)
+                 num_subject_butt.place(x=100,y=200)
+                 add_subject.place(x=100,y=250)
+                 logout.place(x=100,y=300)
                         
                             
 #==============================Adminaddsubject======================================
