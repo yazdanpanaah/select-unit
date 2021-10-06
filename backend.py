@@ -115,6 +115,7 @@ class User:
                     
         
 class Admin:
+    counter = 1
     def __init__(self,subject,teacher,unit,capacity):
         self.subject = subject
         self.teacher = teacher
@@ -123,6 +124,18 @@ class Admin:
         
     def add_subject_data(self):
         fields = ['subject','teacher','unit','capacity']
+        try:
+            with open('subjects-data.csv','r') as file:
+                reader = csv.DictReader(file)
+                data_list = list(reader)
+                for dic in data_list:
+                    if dic['subject'] == self.subject:
+                        self.subject = self.subject + str(Admin.counter) 
+            Admin.counter +=1
+        except FileNotFoundError:
+            messagebox.showinfo(title='file error',message='no such data exist yet so add your info anyway!')
+            
+       
         
         data = [{'subject':self.subject,'teacher':self.teacher,'unit':self.unit,'capacity':self.capacity}]
         with open('subjects-data.csv','a') as f:
