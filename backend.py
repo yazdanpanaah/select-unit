@@ -76,37 +76,55 @@ class User:
                 
                 for key in lines_Data:
                     list_dic.append(lines_Data[key])
-               
-                
+        
                 for dic in list_dic:
-                    
                     if (dic['username'] == input_username) and (dic['code'][0] == 'S'):
                         #print(dic,'student')
                         return 'student'
-                        break
-                    
+                        
+                        
                     if (dic['username'] == input_username) and (dic['code'][0] == 'A'):
                         #print(dic,'admin')
                         return 'admin'
-                        break
-                    
+                        
                     if (dic['username'] == input_username) and (dic['code'][0] == 'T'):
                         #print(dic,'teacher')
                         return 'teacher'
-                        break
+                        
+                        
+                        
+    def get_tree_data(self):
+        list_data = []
+        try:
+            with open('subjects-data.csv','r') as data:
+                reader = csv.DictReader(data,delimiter=',')
+                for row in reader:
+                    subject = row['subject']
+                    unit = row['unit']
+                    teacher = row['teacher']
+                    capacity = row['capacity']
+                    list_data.append([subject,unit,teacher,capacity]) 
+                return list_data
+                
+        except FileNotFoundError:
+            messagebox.showerror(title='error',message='the current data is not availble!')
+            
+        
+    
                 
                     
         
 class Admin:
-    def __init__(self,subject,teacher,unit):
+    def __init__(self,subject,teacher,unit,capacity):
         self.subject = subject
         self.teacher = teacher
         self.unit = unit
+        self.capacity = capacity
         
     def add_subject_data(self):
-        fields = ['subject','teacher','unit']
+        fields = ['subject','teacher','unit','capacity']
         
-        data = [{'subject':self.subject,'teacher':self.teacher,'unit':self.unit}]
+        data = [{'subject':self.subject,'teacher':self.teacher,'unit':self.unit,'capacity':self.capacity}]
         with open('subjects-data.csv','a') as f:
             writer = csv.DictWriter(f, fieldnames =fields ,lineterminator='\n')
             if f.tell() == 0:
@@ -139,6 +157,47 @@ def code_generator(username,password,repit_pass,position):
     else:
           messagebox.showerror(title='empty', message='no data to add')
     
+def num_subject_data():
+    number_1 = 0
+    number_2 = 0
+    number_3 = 0
+    number_4 = 0
+    all_unit = 0
+    
+    
+    try:
+        with open('subjects-data.csv','r') as data:
+            reader = csv.DictReader(data)
+            data = list(reader)
+            for unit in data:
+                if unit['unit'] == '1':
+                    number_1 += 1
+                    all_unit += 1
+                    
+                elif unit['unit'] == '2':
+                    number_2 += 1
+                    all_unit +=2
+              
+                elif unit['unit'] == '3':
+                    number_3 += 1
+                    all_unit +=3
+                    
+                else:
+                    number_4 += 1
+                    all_unit += 4
+                   
+                    
+                    
+    except FileNotFoundError:
+        messagebox.showerror(title='error',message='the current data is not availble!') 
+        
+        
+    all_sub = number_1 + number_2 + number_3 + number_4  
+    return [number_1,number_2,number_3,number_4,all_unit,all_sub] 
+
+
+
 
 #obj = User()
-#print(obj.check_login('sara','123'))
+#a = obj.get_tree_data()
+#print(a[0])
