@@ -195,9 +195,9 @@ class ProgramGui:
                             
                             
                             #buttons
-                            show_butt = Button(student_win, text='see subjects',bg='lightyellow2', fg='black',font ='20',width =30,command=self.show_sub_stu)
-                            search_butt = Button(student_win,text ='search subjects',bg ='lightyellow2', fg ='black',font ='20',width =30,command=self.search)
-                            num_subject_butt = Button(student_win, text='show number of units',bg ='lightyellow2', fg ='black',font ='20',width =30,command=self.all_unit)
+                            show_butt = Button(student_win, text='see subjects',bg='lightyellow2', fg='black',font ='20',width =30,command=self.show_sub_stu3)
+                            search_butt = Button(student_win,text ='search subjects',bg ='lightyellow2', fg ='black',font ='20',width =30,command=self.search2)
+                            num_subject_butt = Button(student_win, text='show number of units',bg ='lightyellow2', fg ='black',font ='20',width =30,command=self.all_unit1)
                             logout = Button(student_win,text='logout',bg ='black', fg ='white',font ='10',width =30,command=self.logout)
                             
                             show_butt.place(x=100,y=100)
@@ -221,11 +221,11 @@ class ProgramGui:
                  header.grid(row=0, column=0)
                             
                  #buttons
-                 show_butt = Button(admin_win, text='see subjects',bg='lightyellow2', fg='black',font ='20',width =30,command=self.show_sub)
-                 search_butt = Button(admin_win,text ='search subjects',bg ='lightyellow2', fg ='black',font ='20',width =30,command=self.search_2)
-                 num_subject_butt = Button(admin_win, text='show number of units',bg ='lightyellow2', fg ='black',font ='20',width =30,command=self.all_unit2)
+                 show_butt = Button(admin_win, text='see subjects',bg='lightyellow2', fg='black',font ='20',width =30,command=self.show_sub5)
+                 search_butt = Button(admin_win,text ='search subjects',bg ='lightyellow2', fg ='black',font ='20',width =30,command=self.search_4)
+                 num_subject_butt = Button(admin_win, text='show number of units',bg ='lightyellow2', fg ='black',font ='20',width =30,command=self.all_unit6)
                  logout = Button(admin_win,text='logout',bg ='black', fg ='white',font ='10',width =30,command=self.logout2)
-                 add_subject = Button(admin_win,text='add subject',bg ='black', fg ='white',font ='10',width =30,command=self.add_subject)
+                 add_subject = Button(admin_win,text='add subject',bg ='black', fg ='white',font ='10',width =30,command=self.add_subject7)
                             
                  show_butt.place(x=100,y=100)
                  search_butt.place(x=100,y=150)
@@ -246,165 +246,157 @@ class ProgramGui:
                             
                             
                  #buttons
-                 show_butt = Button(teacher_win, text='see subjects',bg='lightyellow2', fg='black',font ='20',width =30,command=self.show_sub)
-                 search_butt = Button(teacher_win,text ='search subjects',bg ='lightyellow2', fg ='black',font ='20',width =30,command=self.search_2)
-                 logout = Button(teacher_win,text='logout',bg ='black', fg ='white',font ='10',width =30,command=self.logout3)
-                 add_subject = Button(teacher_win,text='add subject',bg ='black', fg ='white',font ='10',width =30,command=self.add_subject)
+                 show_butt = Button(teacher_win, text='see subjects',bg='lightyellow2', fg='black',font ='20',width =30,command=self.show_sub9)
+                 search_butt = Button(teacher_win,text ='search subjects',bg ='lightyellow2', fg ='black',font ='20',width =30,command=self.search_8)
+                 logout = Button(teacher_win,text='logout',bg ='black', fg ='white',font ='10',width =30,command=self.logout4)
+                 add_subject = Button(teacher_win,text='add subject',bg ='black', fg ='white',font ='10',width =30)
                             
                  show_butt.place(x=100,y=100)
                  search_butt.place(x=100,y=150)
                  add_subject.place(x=100,y=200)
                  logout.place(x=100,y=250)
 #==============================teacherlogout======================================
-    def logout3(self):
+    def logout4(self):
         self.teacher_win.destroy()
         obj5=ProgramGui()
         obj5.mainloop()                             
                             
                             
 #==============================teacherShowButt======================================
-    def rm30(self):
-         self.f30.destroy()
+    def rm9(self):
+         self.f9.destroy()
          
          
-    def show_sub(self):  
+    def show_sub9(self):  
         
-        self.f30=Frame(self.admin_win,height=500,width=500,bg='black')
-        self.f30.place(x = 470,y = 100)
-        b30=Button(self.f30,text='Back',bg='orange' ,fg='black',width=10,bd=3,command=self.rm30).place(x=250,y=400)
-        self.list30 = ("SUBJECT","TEACHER","UNIT")
-        self.treess30 = self.create_tree(self.f30,self.list30)
-        self.treess30.place(x=25,y=50)
-        obj30 = bc.User()
-        subject_info = obj30.get_tree_data()
-        self.treess30.insert('',END,values=(subject_info[0],subject_info[1],subject_info[2]))
+        self.f9=Frame(self.teacher_win,height=500,width=500,bg='black')
+        self.f9.place(x = 470,y = 100)
+        b9=Button(self.f9,text='Back',bg='orange' ,fg='black',width=10,bd=3,command=self.rm9).place(x=250,y=400)
+        self.list9 = ("SUBJECT","TEACHER","UNIT")
+        self.treess9 = self.create_tree(self.f9,self.list9)
+        self.treess9.place(x=25,y=50)
+        obj9 = bc.User()
+        subject_info9 = obj9.get_tree_data()
+        for data9 in subject_info9:
+            self.treess9.insert('',END,values=(data9[0],data9[2],data9[1],data9[3]))
                     
                                 
                             
-#==============================adminSearchButt======================================
+#==============================TeacherSearchButt======================================
     def rm8(self):
-         self.f6.destroy()
+         self.f8.destroy()
          
          
-    def serch2(self):
-        input_search2 =self.sid3.get()
-        if input_search2 !="" :
-            self.list7=("SUBJECT","TEACHER","UNIT")
-            self.trees=self.create_tree(self.f6,self.list7)
-            self.trees.place(x=25,y=150)
+    def serch8(self):
+        input_search8 =self.sid8.get()
+        if input_search8 !="" :
+            self.list8=("SUBJECT","TEACHER","UNIT","CAPACITY")
+            self.trees8=self.create_tree(self.f8,self.list8)
+            self.trees8.place(x=25,y=150)
             
-            try:
-                with open('subjects-data.csv','r') as data:
-                    reader = csv.DictReader(data,delimiter=',')
-                    for row in reader:
-                        if input_search2 == row['subject']:
-                            subject = row['subject']
-                            unit = row['unit']
-                            teacher = row['teacher']
-                        
-                            self.trees.insert('',END,values=(subject,teacher,unit))
-                        else:
-                            messagebox.showerror(title='error',message='the current data is not availble!')
-                    
-            except FileNotFoundError:
-                messagebox.showerror(title='error',message='the current data is not availble!')
-           
+            obj8 = bc.User()
+            subject_info8 = obj8.get_tree_data()
+            for data8 in subject_info8:
+                if input_search8 == data8[0]:
+                    self.trees8.insert('',END,values=(data8[0],data8[2],data8[1],data8[3]))
+                
+            
             
         else:
             messagebox.showinfo("Error","Data not found")
          
-    def search_2(self):
-        self.sid3=StringVar()
-        self.f6=Frame(self.admin_win,height=500,width=500,bg='black')
-        self.f6.place(x=450,y=100)
-        l1=Label(self.f6,text='Subject: ',font=('Papyrus 10 bold'),bd=2, fg='orange',bg='black').place(x=20,y=40)
-        e1=Entry(self.f6,width=25,bd=5,bg='orange',fg='black',textvariable=self.sid3).place(x=180,y=40)
-        b1=Button(self.f6,text='Search',bg='orange',font='Papyrus 10 bold',width=9,bd=2,command=self.serch2).place(x=400,y=37)
-        b1=Button(self.f6,text='Back',bg='orange',font='Papyrus 10 bold',width=10,bd=2,command=self.rm8).place(x=250,y=450)  
+    def search_8(self):
+        self.sid8 =StringVar()
+        self.f8=Frame(self.teacher_win,height=500,width=500,bg='black')
+        self.f8.place(x=450,y=100)
+        l1=Label(self.f8,text='Subject: ',font=('Papyrus 10 bold'),bd=2, fg='orange',bg='black').place(x=20,y=40)
+        e1=Entry(self.f8,width=25,bd=5,bg='orange',fg='black',textvariable=self.sid8).place(x=180,y=40)
+        b1=Button(self.f8,text='Search',bg='orange',font='Papyrus 10 bold',width=9,bd=2,command=self.serch8).place(x=400,y=37)
+        b1=Button(self.f8,text='Back',bg='orange',font='Papyrus 10 bold',width=10,bd=2,command=self.rm8).place(x=250,y=450)  
 
                         
                             
 #==============================Adminaddsubject======================================
-    def rm10(self):
-        self.f10.destroy()
+    def rm7(self):
+        self.f7.destroy()
         
-    def add_data(self):
+    def add_data7(self):
         subject = self.subject.get()
         teacher = self.teacher.get()
         unit = self.unit.get()
         capacity = self.capacity.get()
         if (subject and unit and capacity):
-            obj10 = bc.Admin(subject,teacher,unit,capacity)
-            obj10.add_subject_data()
+            obj7 = bc.Admin(subject,teacher,unit,capacity)
+            obj7.add_subject_data()
             messagebox.showinfo(title='successful',message='data added successfuly!')
         else:
             messagebox.showerror(title='empty',message='no data to add')
         
         
-    def add_subject(self):
+    def add_subject7(self):
         
         self.subject=StringVar()
         self.teacher=StringVar()
         self.unit=StringVar()
         self.capacity =StringVar()
         
-        self.f10=Frame(self.admin_win,height=500,width=650,bg='black')
-        self.f10.place(x=500,y=100)
-        l1=Label(self.f10,text='subject name : ',font='Papyrus 12 bold',fg='Orange',bg='Black',pady=1).place(x=50,y=50)
-        e1=Entry(self.f10,width=45,bg='orange',fg='black',textvariable=self.subject).place(x=150,y=50)
+        self.f7=Frame(self.admin_win,height=500,width=650,bg='black')
+        self.f7.place(x=500,y=100)
+        l1=Label(self.f7,text='subject name : ',font='Papyrus 12 bold',fg='Orange',bg='Black',pady=1).place(x=50,y=50)
+        e1=Entry(self.f7,width=45,bg='orange',fg='black',textvariable=self.subject).place(x=150,y=50)
         
-        l2=Label(self.f10,text='Teacher : ',font='Papyrus 12 bold',fg='Orange',bg='Black',pady=1).place(x=50,y=100)
-        e2=Entry(self.f10,width=45,bg='orange',fg='black',textvariable=self.teacher).place(x=150,y=100)
+        l2=Label(self.f7,text='Teacher : ',font='Papyrus 12 bold',fg='Orange',bg='Black',pady=1).place(x=50,y=100)
+        e2=Entry(self.f7,width=45,bg='orange',fg='black',textvariable=self.teacher).place(x=150,y=100)
         
-        l3=Label(self.f10,text='Unit : ',font='Papyrus 12 bold',fg='orange',bg='Black',pady=1).place(x=50,y=150)
-        e3=Entry(self.f10,width=45,bg='orange',fg='black',textvariable=self.unit).place(x=150,y=150)
+        l3=Label(self.f7,text='Unit : ',font='Papyrus 12 bold',fg='orange',bg='Black',pady=1).place(x=50,y=150)
+        e3=Entry(self.f7,width=45,bg='orange',fg='black',textvariable=self.unit).place(x=150,y=150)
         
-        l4=Label(self.f10,text='capacity : ',font='Papyrus 12 bold',fg='orange',bg='Black',pady=1).place(x=50,y=200)
-        e4=Entry(self.f10,width=45,bg='orange',fg='black',textvariable=self.capacity).place(x=150,y=200)
+        l4=Label(self.f7,text='capacity : ',font='Papyrus 12 bold',fg='orange',bg='Black',pady=1).place(x=50,y=200)
+        e4=Entry(self.f7,width=45,bg='orange',fg='black',textvariable=self.capacity).place(x=150,y=200)
         
-        self.f10.grid_propagate(0)
-        b1=Button(self.f10,text='Add',font='Papyrus 10 bold',fg='black',bg='orange',width=15,bd=3,command=self.add_data)
-        b2=Button(self.f10,text='Back',font='Papyrus 10 bold',fg='black',bg='orange',width=15,bd=3,command=self.rm10)
+        self.f7.grid_propagate(0)
+        b1=Button(self.f7,text='Add',font='Papyrus 10 bold',fg='black',bg='orange',width=15,bd=3,command=self.add_data7)
+        b2=Button(self.f7,text='Back',font='Papyrus 10 bold',fg='black',bg='orange',width=15,bd=3,command=self.rm7)
         
         b1.place(x=150,y=250)
         b2.place(x=150,y=300)
                             
                             
 #==============================AdminnumberOfSubject======================================
-    def rm9(self):
-        self.f9.destroy()
+    def rm6(self):
+        self.f6.destroy()
                    
-    def show_all2(self):
-        self.list9 = ("UNITS","NUMBER")
-        self.treess9 = self.create_tree(self.f9,self.list9)
-        self.treess9.place(x=40,y=100)
+    def show_all6(self):
+        self.list6 = ("UNITS","NUMBER")
+        self.treess6 = self.create_tree(self.f6,self.list6)
+        self.treess6.place(x=40,y=100)
         
         num_data = bc.num_subject_data()
         
         
-        self.treess9.insert('',END,values=('1',str(num_data[0])))
+        self.treess6.insert('',END,values=('1',str(num_data[0])))
         
-        self.treess9.insert('',END,values=('2',str(num_data[1])))
+        self.treess6.insert('',END,values=('2',str(num_data[1])))
        
               
-        self.treess9.insert('',END,values=('3',str(num_data[2])))
+        self.treess6.insert('',END,values=('3',str(num_data[2])))
             
                
-        self.treess9.insert('',END,values=('4',str(num_data[3])))
+        self.treess6.insert('',END,values=('4',str(num_data[3])))
         
         #last line of treeviwe contain number of subjects and sum of their units
-        self.treess9.insert('',END,values=(f'all_units = {num_data[4]}',f'all_subjects = {num_data[5]}'))
+        self.treess6.insert('',END,values=(f'all_units = {num_data[4]}',f'all_subjects = {num_data[5]}'))
         
         
             
         
         
-    def all_unit2(self):
-        self.f9=Frame(self.admin_win,height=500,width=500,bg='black')
-        self.f9.place(x=450,y=100)
-        l1=Label(self.f9,text='Subject: ',font=('Papyrus 10 bold'),bd=2, fg='orange',bg='black').place(x=20,y=40)
-        b1=Button(self.f9,text='Go',bg='orange',font='Papyrus 10 bold',width=20,bd=2,command=self.show_all2).place(x=200,y=37)
-        b1=Button(self.f9,text='Back',bg='orange',font='Papyrus 10 bold',width=10,bd=2,command=self.rm9).place(x=250,y=450)
+    def all_unit6(self):
+        self.f6=Frame(self.admin_win,height=500,width=500,bg='black')
+        self.f6.place(x=450,y=100)
+        l1=Label(self.f6,text='Subject: ',font=('Papyrus 10 bold'),bd=2, fg='orange',bg='black').place(x=20,y=40)
+        b1=Button(self.f6,text='Go',bg='orange',font='Papyrus 10 bold',width=20,bd=2,command=self.show_all6).place(x=200,y=37)
+        b1=Button(self.f6,text='Back',bg='orange',font='Papyrus 10 bold',width=10,bd=2,command=self.rm6).place(x=250,y=450)
                             
                             
                             
@@ -416,59 +408,58 @@ class ProgramGui:
                             
                             
 #==============================adminShowButt======================================
-    def rm4(self):
-         self.f4.destroy()
+    def rm5(self):
+         self.f5.destroy()
          
          
-    def show_sub(self):    
-        self.f4=Frame(self.admin_win,height=500,width=500,bg='black')
-        self.f4.place(x=470,y=100)
-        b1=Button(self.f4,text='Back',bg='orange' ,fg='black',width=10,bd=3,command=self.rm4).place(x=250,y=400)
-        self.list4=("SUBJECT","TEACHER","UNIT","CAPACITY")
-        self.treess4=self.create_tree(self.f4,self.list4)
-        self.treess4.place(x=25,y=50)
+    def show_sub5(self):    
+        self.f5=Frame(self.admin_win,height=500,width=500,bg='black')
+        self.f5.place(x=470,y=100)
+        b1=Button(self.f5,text='Back',bg='orange' ,fg='black',width=10,bd=3,command=self.rm5).place(x=250,y=400)
+        self.list5=("SUBJECT","TEACHER","UNIT","CAPACITY")
+        self.treess5 = self.create_tree(self.f5,self.list5)
+        self.treess5.place(x=25,y=50)
         
-        obj4 = bc.User()
-        subject_info4 = obj4.get_tree_data()
-        for data4 in subject_info4:
-            self.treess4.insert('',END,values=(data4[0],data4[2],data4[1],data4[3]))
+        obj5 = bc.User()
+        subject_info5 = obj5.get_tree_data()
+        for data5 in subject_info5:
+            self.treess5.insert('',END,values=(data5[0],data5[2],data5[1],data5[3]))
                 
         
         
                          
                             
 #==============================adminSearchButt======================================
-    def rm8(self):
+    def rm4(self):
          self.f8.destroy()
          
          
-    def serch2(self):
-        input_search8 =self.sid8.get()
-        if input_search8 !="" :
-            self.list8=("SUBJECT","TEACHER","UNIT","CAPACITY")
-            self.trees=self.create_tree(self.f8,self.list8)
-            self.trees.place(x=25,y=150)
+    def serch4(self):
+        input_search4 =self.sid4.get()
+        if input_search4 !="" :
+            self.list4=("SUBJECT","TEACHER","UNIT","CAPACITY")
+            self.trees4=self.create_tree(self.f4,self.list4)
+            self.trees4.place(x=25,y=150)
             
-            obj8 = bc.User()
-            subject_info8 = obj8.get_tree_data()
-            for data8 in subject_info8:
-                if input_search8 == data8[0]:
-                    self.trees.insert('',END,values=(data8[0],data8[2],data8[1],data8[3]))
-                else:
-                    messagebox.showerror(title='error',message='no subject available with this name')
+            obj4 = bc.User()
+            subject_info4 = obj4.get_tree_data()
+            for data4 in subject_info4:
+                if input_search4 == data4[0]:
+                    self.trees.insert('',END,values=(data4[0],data4[2],data4[1],data4[3]))
+                
             
             
         else:
             messagebox.showinfo("Error","Data not found")
          
-    def search_2(self):
-        self.sid8 = StringVar()
-        self.f8=Frame(self.admin_win,height=500,width=500,bg='black')
-        self.f8.place(x=450,y=100)
-        l1=Label(self.f8,text='Subject: ',font=('Papyrus 10 bold'),bd=2, fg='orange',bg='black').place(x=20,y=40)
-        e1=Entry(self.f8,width=25,bd=5,bg='orange',fg='black',textvariable=self.sid8).place(x=180,y=40)
-        b1=Button(self.f8,text='Search',bg='orange',font='Papyrus 10 bold',width=9,bd=2,command=self.serch2).place(x=400,y=37)
-        b1=Button(self.f8,text='Back',bg='orange',font='Papyrus 10 bold',width=10,bd=2,command=self.rm8).place(x=250,y=450)                              
+    def search_4(self):
+        self.sid4 = StringVar()
+        self.f4 = Frame(self.admin_win,height=500,width=500,bg='black')
+        self.f4.place(x=450,y=100)
+        l1=Label(self.f4,text='Subject: ',font=('Papyrus 10 bold'),bd=2, fg='orange',bg='black').place(x=20,y=40)
+        e1=Entry(self.f4,width=25,bd=5,bg='orange',fg='black',textvariable=self.sid4).place(x=180,y=40)
+        b1=Button(self.f4,text='Search',bg='orange',font='Papyrus 10 bold',width=9,bd=2,command=self.serch4).place(x=400,y=37)
+        b1=Button(self.f4,text='Back',bg='orange',font='Papyrus 10 bold',width=10,bd=2,command=self.rm4).place(x=250,y=450)                              
                             
                             
                             
@@ -486,103 +477,88 @@ class ProgramGui:
         
                     
                     
-#==============================ShowButt======================================
+#==============================StudentShowButt======================================
     def rm3(self):
          self.f3.destroy()
          
          
-    def show_sub_stu(self):    
+    def show_sub_stu3(self):    
         self.f3=Frame(self.student_win,height=500,width=500,bg='black')
         self.f3.place(x=470,y=100)
         b1=Button(self.f3,text='Back',bg='orange' ,fg='black',width=10,bd=3,command=self.rm3).place(x=250,y=400)
-        self.list5=("SUBJECT","TEACHER","UNIT")
-        self.treess2=self.create_tree(self.f3,self.list5)
-        self.treess2.place(x=25,y=50)
+        self.list3 = ("SUBJECT","TEACHER","UNIT")
+        self.treess3 = self.create_tree(self.f3,self.list3)
+        self.treess3.place(x=25,y=50)
         
         
-        try:
-            with open('subjects-data.csv','r') as data:
-                reader = csv.DictReader(data,delimiter=',')
-                for row in reader:
-                    subject = row['subject']
-                    unit = row['unit']
-                    teacher = row['teacher']
-                    
-                    self.treess2.insert('',END,values=(subject,teacher,unit))
-                    
-        except FileNotFoundError:
-            messagebox.showerror(title='error',message='the current data is not availble!')  
+        obj3 = bc.User()
+        subject_info3 = obj3.get_tree_data()
+        for data3 in subject_info3:
+            self.treess3.insert('',END,values=(data3[0],data3[2],data3[1],data3[3]))
 
 
-#==============================SearchButt======================================
+#==============================StudentSearchButt======================================
     def rm2(self):
-         self.f1.destroy()
+         self.f2.destroy()
          
          
-    def serch1(self):
-        input_search =self.sid.get()
-        if input_search !="" :
-            self.list4=("SUBJECT","TEACHER","UNIT")
-            self.trees=self.create_tree(self.f1,self.list4)
-            self.trees.place(x=25,y=150)
+    def serch2(self):
+        input_search2 =self.sid2.get()
+        if input_search2 !="" :
+            self.list2 = ("SUBJECT","TEACHER","UNIT")
+            self.trees2 = self.create_tree(self.f2,self.list2)
+            self.trees2.place(x=25,y=150)
             
-            try:
-                with open('subjects-data.csv','r') as data:
-                    reader = csv.DictReader(data,delimiter=',')
-                    for row in reader:
-                        if input_search == row['subject']:
-                            subject = row['subject']
-                            unit = row['unit']
-                            teacher = row['teacher']
-                        
-                            self.trees.insert('',END,values=(subject,teacher,unit))
-                        else:
-                            messagebox.showerror(title='error',message='the current data is not availble!')
+            obj2 = bc.User()
+            subject_info2 = obj2.get_tree_data()
+            for data2 in subject_info2:
+                if input_search2 == data2[0]:
+                    self.trees2.insert('',END,values=(data2[0],data2[2],data2[1],data2[3]))
                     
-            except FileNotFoundError:
-                messagebox.showerror(title='error',message='the current data is not availble!')
-           
             
         else:
             messagebox.showinfo("Error","Data not found")
          
-    def search(self):
-        self.sid=StringVar()
+    def search2(self):
+        self.sid2 = StringVar()
+        self.f2 = Frame(self.student_win,height=500,width=500,bg='black')
+        self.f2.place(x=450,y=100)
+        l2=Label(self.f2,text='Subject: ',font=('Papyrus 10 bold'),bd=2, fg='orange',bg='black').place(x=20,y=40)
+        e2=Entry(self.f2,width=25,bd=5,bg='orange',fg='black',textvariable=self.sid2).place(x=180,y=40)
+        b2=Button(self.f2,text='Search',bg='orange',font='Papyrus 10 bold',width=9,bd=2,command=self.serch2).place(x=400,y=37)
+        b2=Button(self.f2,text='Back',bg='orange',font='Papyrus 10 bold',width=10,bd=2,command=self.rm2).place(x=250,y=450)  
+             
+#==============================StudentnumberOfSubject======================================
+    def rm1(self):
+        self.f1.destroy()
+                   
+    def show_all_1(self):
+        self.list1=("UNITS","NUMBER")
+        self.treess1=self.create_tree(self.f1,self.list1)
+        self.treess1.place(x=40,y=100)
+        
+        num_data = bc.num_subject_data()
+        
+        
+        self.treess1.insert('',END,values=('1',str(num_data[0])))
+        
+        self.treess1.insert('',END,values=('2',str(num_data[1])))
+       
+              
+        self.treess1.insert('',END,values=('3',str(num_data[2])))
+            
+               
+        self.treess1.insert('',END,values=('4',str(num_data[3])))
+        
+        #last line of treeviwe contain number of subjects and sum of their units
+        self.treess1.insert('',END,values=(f'all_units = {num_data[4]}',f'all_subjects = {num_data[5]}'))
+        
+    def all_unit1(self):
         self.f1=Frame(self.student_win,height=500,width=500,bg='black')
         self.f1.place(x=450,y=100)
         l1=Label(self.f1,text='Subject: ',font=('Papyrus 10 bold'),bd=2, fg='orange',bg='black').place(x=20,y=40)
-        e1=Entry(self.f1,width=25,bd=5,bg='orange',fg='black',textvariable=self.sid).place(x=180,y=40)
-        b1=Button(self.f1,text='Search',bg='orange',font='Papyrus 10 bold',width=9,bd=2,command=self.serch1).place(x=400,y=37)
-        b1=Button(self.f1,text='Back',bg='orange',font='Papyrus 10 bold',width=10,bd=2,command=self.rm2).place(x=250,y=450)  
-             
-#==============================numberOfSubject======================================
-    def rm1(self):
-        self.f2.destroy()
-                   
-    def show_all(self):
-        self.list4=("UNITS","NUMBER")
-        self.treess1=self.create_tree(self.f2,self.list4)
-        self.treess1.place(x=40,y=100)
-        number= 0
-        try:
-            with open('subjects-data.csv','r') as data:
-                reader = csv.DictReader(data,delimiter=',')
-                for row in reader:
-                    unit = row['unit']
-                    number += int(unit)
-                   
-                    
-                self.treess1.insert('',END,values =(unit,str(number)))
-                    
-        except FileNotFoundError:
-            messagebox.showerror(title='error',message='the current data is not availble!')
-        
-    def all_unit(self):
-        self.f2=Frame(self.student_win,height=500,width=500,bg='black')
-        self.f2.place(x=450,y=100)
-        l1=Label(self.f2,text='Subject: ',font=('Papyrus 10 bold'),bd=2, fg='orange',bg='black').place(x=20,y=40)
-        b1=Button(self.f2,text='Go',bg='orange',font='Papyrus 10 bold',width=20,bd=2,command=self.show_all).place(x=200,y=37)
-        b1=Button(self.f2,text='Back',bg='orange',font='Papyrus 10 bold',width=10,bd=2,command=self.rm1).place(x=250,y=450)
+        b1=Button(self.f1,text='Go',bg='orange',font='Papyrus 10 bold',width=20,bd=2,command=self.show_all_1).place(x=200,y=37)
+        b1=Button(self.f1,text='Back',bg='orange',font='Papyrus 10 bold',width=10,bd=2,command=self.rm1).place(x=250,y=450)
         
    
         
