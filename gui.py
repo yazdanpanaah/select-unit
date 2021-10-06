@@ -1,4 +1,4 @@
-from tkinter import Tk, Label, Button, Entry, Frame ,ttk  ,END,StringVar
+from tkinter import Tk, Label, Button, Entry, Frame ,ttk  ,END,StringVar,NO,CENTER
 from PIL import ImageTk, Image
 import tkinter as tk
 from tkinter import messagebox
@@ -176,11 +176,11 @@ class ProgramGui:
         back_butt.place(x=180,y=300)
     
     def login(self):
-         input_username = self.input_username.get()
+         self.input_username2 = self.input_username.get()
          input_password = self.input_password.get()
          obj2 = bc.User()
-         if obj2.check_login(input_username,input_password) == True:
-             if obj2.check_position(input_username) == 'student':
+         if obj2.check_login(self.input_username2,input_password) == True:
+             if obj2.check_position(self.input_username2) == 'student':
                        
 #==============================StudentMenu======================================
                             self.login_win1.destroy()
@@ -190,7 +190,7 @@ class ProgramGui:
                             student_win.config(background='orange')
                             
                             #labels
-                            header = Label(student_win, text=['hello',input_username,'welcome to student panel'], bg='black',fg='white', font=("Courier","30","bold"))
+                            header = Label(student_win, text=['hello',self.input_username2,'welcome to student panel'], bg='black',fg='white', font=("Courier","30","bold"))
                             header.grid(row=0, column=0)
                             
                             
@@ -198,26 +198,28 @@ class ProgramGui:
                             show_butt = Button(student_win, text='see subjects',bg='lightyellow2', fg='black',font ='20',width =30,command=self.show_sub_stu3)
                             search_butt = Button(student_win,text ='search subjects',bg ='lightyellow2', fg ='black',font ='20',width =30,command=self.search2)
                             num_subject_butt = Button(student_win, text='show number of units',bg ='lightyellow2', fg ='black',font ='20',width =30,command=self.all_unit1)
+                            get_subject = Button(student_win,text='get subject',bg ='lightyellow2', fg ='black',font ='10',width =30,command=self.choose_sub12)
                             logout = Button(student_win,text='logout',bg ='black', fg ='white',font ='10',width =30,command=self.logout)
                             
                             show_butt.place(x=100,y=100)
                             search_butt.place(x=100,y=150)
                             num_subject_butt.place(x=100,y=200)
-                            logout.place(x=100,y=250)
+                            get_subject.place(x=100,y=250)
+                            logout.place(x=100,y=300)
                             
                         
 #==============================AdminMenu======================================
                         
-             elif obj2.check_position(input_username) == 'admin':
+             elif obj2.check_position(self.input_username2) == 'admin':
                  
                  self.login_win1.destroy()
                  self.admin_win = admin_win = Tk()
-                 self.admin_win.minsize(1000, 1000)
+                 self.admin_win.minsize(1800, 1800)
                  admin_win.title('login menu2')
                  admin_win.config(background='orange')
                             
                  #labels
-                 header = Label(admin_win, text=f"hello {input_username}  welcome to Admins's panel", bg='black',fg='white', font=("Courier","30","bold"))
+                 header = Label(admin_win, text=f"hello {self.input_username2}  welcome to Admins's panel", bg='black',fg='white', font=("Courier","30","bold"))
                  header.grid(row=0, column=0)
                             
                  #buttons
@@ -225,13 +227,21 @@ class ProgramGui:
                  search_butt = Button(admin_win,text ='search subjects',bg ='lightyellow2', fg ='black',font ='20',width =30,command=self.search_4)
                  num_subject_butt = Button(admin_win, text='show number of units',bg ='lightyellow2', fg ='black',font ='20',width =30,command=self.all_unit6)
                  logout = Button(admin_win,text='logout',bg ='black', fg ='white',font ='10',width =30,command=self.logout2)
+                 search_stu = Button(admin_win,text='search Students',bg ='lightyellow2', fg ='black',font ='10',width =30,command=self.search_student_frame)
+                 search_sub = Button(admin_win,text='search student of subject',bg ='lightyellow2', fg ='black',font ='10',width =30,command=self.search_by_sub)
+                 show_stu = Button(admin_win,text='show all Students',bg ='lightyellow2', fg ='black',font ='10',width =30,command=self.show_all_student)
+                 req_stu = Button(admin_win,text='Students Requests',bg ='lightyellow2', fg ='black',font ='10',width =30,command=self.send_sub12)
                  add_subject = Button(admin_win,text='add subject',bg ='black', fg ='white',font ='10',width =30,command=self.add_subject7)
                             
                  show_butt.place(x=100,y=100)
                  search_butt.place(x=100,y=150)
                  num_subject_butt.place(x=100,y=200)
                  add_subject.place(x=100,y=250)
-                 logout.place(x=100,y=300)
+                 search_stu.place(x=100,y=300)
+                 search_sub.place(x=100,y=350)
+                 show_stu.place(x=100,y=400)
+                 req_stu.place(x=100,y=450)
+                 logout.place(x=100,y=500)
 #==============================TeacherMenu======================================
              else:
                  self.login_win1.destroy()
@@ -241,7 +251,7 @@ class ProgramGui:
                  teacher_win.config(background='orange')
                             
                  #labels
-                 header = Label(teacher_win, text=f"hello {input_username}  welcome to teacher's panel", bg='black',fg='white', font=("Courier","30","bold"))
+                 header = Label(teacher_win, text=f"hello {self.input_username2}  welcome to teacher's panel", bg='black',fg='white', font=("Courier","30","bold"))
                  header.grid(row=0, column=0)
                             
                             
@@ -249,12 +259,215 @@ class ProgramGui:
                  show_butt = Button(teacher_win, text='see subjects',bg='lightyellow2', fg='black',font ='20',width =30,command=self.show_sub9)
                  search_butt = Button(teacher_win,text ='search subjects',bg ='lightyellow2', fg ='black',font ='20',width =30,command=self.search_8)
                  logout = Button(teacher_win,text='logout',bg ='black', fg ='white',font ='10',width =30,command=self.logout4)
-                 add_subject = Button(teacher_win,text='add subject',bg ='black', fg ='white',font ='10',width =30)
+                 get_subject = Button(teacher_win,text='add subject',bg ='black', fg ='white',font ='10',width =30,command=self.choose_sub10)
+                 search_stu_sub = Button(teacher_win,text='search student by subject',bg ='black', fg ='white',font ='10',width =30,command=self.search_by_sub2)
                             
                  show_butt.place(x=100,y=100)
                  search_butt.place(x=100,y=150)
-                 add_subject.place(x=100,y=200)
-                 logout.place(x=100,y=250)
+                 get_subject.place(x=100,y=200)
+                 search_stu_sub.place(x=100,y=250)
+                 logout.place(x=100,y=300)
+                 
+#==============================teacherchoosesubject======================================
+    def rm16(self):
+        self.f16.destroy()
+
+
+    def serch16(self):
+        input_search16 =self.sid16.get()
+        if input_search16 !="" :
+            self.list16=("NAME","CODE")
+            self.trees16=self.create_tree(self.f16,self.list16)
+            self.trees16.place(x=25,y=150)
+            
+            obj16 = bc.Teacher()
+            subject_info16 = obj16.search_by_sub2(input_search16)
+            for data16 in subject_info16:
+                self.trees16.insert('',END,values=(data16[0],data16[1]))
+                
+            
+            
+        else:
+            messagebox.showinfo("Error","Data not found")
+
+
+
+
+    def search_by_sub2(self):
+        self.sid16 = StringVar()
+        self.f16 = Frame(self.teacher_win,height=600,width=600,bg='black')
+        self.f16.place(x=450,y=100)
+        l1=Label(self.f16,text='Subject: ',font=('Papyrus 10 bold'),bd=2, fg='orange',bg='black').place(x=20,y=40)
+        e1=Entry(self.f16,width=25,bd=5,bg='orange',fg='black',textvariable=self.sid16).place(x=180,y=40)
+        b1=Button(self.f16,text='Search',bg='orange',font='Papyrus 10 bold',width=9,bd=2,command=self.serch16).place(x=400,y=37)
+        b2=Button(self.f16,text='Back',bg='orange',font='Papyrus 10 bold',width=10,bd=2,command=self.rm16).place(x=250,y=450)               
+#==============================teacherchoosesubject====================================== 
+    def rm10(self):
+         self.f10.destroy()
+    def choose_sub10(self):
+        self.f10=Frame(self.teacher_win,height=500,width=500,bg='black')
+        self.f10.place(x = 470,y = 100)
+        # Combobox creation
+        self.subject1 = tk.StringVar()
+        self.subject2 = tk.StringVar()
+        self.subject3 = tk.StringVar()
+        self.subject4 = tk.StringVar()
+        self.subject5 = tk.StringVar()
+        self.subject6 = tk.StringVar()
+        self.subject7 = tk.StringVar()
+        
+        
+        subjectchoosen1 = ttk.Combobox(self.f10, width = 27, textvariable = self.subject1)
+        subjectchoosen2 = ttk.Combobox(self.f10, width = 27, textvariable = self.subject2)
+        subjectchoosen3 = ttk.Combobox(self.f10, width = 27, textvariable = self.subject3)
+        subjectchoosen4 = ttk.Combobox(self.f10, width = 27, textvariable = self.subject4)
+        subjectchoosen5 = ttk.Combobox(self.f10, width = 27, textvariable = self.subject5)
+        subjectchoosen6 = ttk.Combobox(self.f10, width = 27, textvariable = self.subject6)
+        subjectchoosen7 = ttk.Combobox(self.f10, width = 27, textvariable = self.subject7)
+        
+        
+        #get the lessons with no teacher
+        obj10 = bc.User()
+        sub_data10 =  obj10.choose_sub()
+       
+       
+        subjectchoosen1['values'] = sub_data10
+        subjectchoosen1['state'] = 'readonly'
+        subjectchoosen1.place(x=20,y=10)
+        subjectchoosen1.current()
+        
+        subjectchoosen2['values'] = sub_data10
+        subjectchoosen2['state'] = 'readonly'
+        subjectchoosen2.place(x=20,y=40)
+        subjectchoosen2.current()
+        
+        subjectchoosen3['values'] = sub_data10
+        subjectchoosen3['state'] = 'readonly'
+        subjectchoosen3.place(x=20,y=70)
+        subjectchoosen3.current()
+        
+        subjectchoosen4['values'] = sub_data10
+        subjectchoosen4['state'] = 'readonly'
+        subjectchoosen4.place(x=20,y=100)
+        subjectchoosen4.current()
+        
+        subjectchoosen5['values'] = sub_data10
+        subjectchoosen5['state'] = 'readonly'
+        subjectchoosen5.place(x=20,y=130)
+        subjectchoosen5.current()
+        
+        subjectchoosen6['values'] = sub_data10
+        subjectchoosen6['state'] = 'readonly'
+        subjectchoosen6.place(x=20,y=160)
+        subjectchoosen6.current()
+        
+        subjectchoosen7['values'] = sub_data10
+        subjectchoosen7['state'] = 'readonly'
+        subjectchoosen7.place(x=20,y=190)
+        subjectchoosen7.current()
+        
+        
+        
+        
+        
+        
+        self.subjects1 = tk.StringVar()
+        self.subjects2 = tk.StringVar()
+        self.subjects3 = tk.StringVar()
+        self.subjects4 = tk.StringVar()
+        self.subjects5 = tk.StringVar()
+        self.subjects6 = tk.StringVar()
+        self.subjects7 = tk.StringVar()
+        self.subjects8 = tk.StringVar()
+        
+        
+        
+        subjectschoosen1 = ttk.Combobox(self.f10, width = 27, textvariable = self.subjects1)
+        subjectschoosen2 = ttk.Combobox(self.f10, width = 27, textvariable = self.subjects2)
+        subjectschoosen3 = ttk.Combobox(self.f10, width = 27, textvariable = self.subjects3)
+        subjectschoosen4 = ttk.Combobox(self.f10, width = 27, textvariable = self.subjects4)
+        subjectschoosen5 = ttk.Combobox(self.f10, width = 27, textvariable = self.subjects5)
+        subjectschoosen6 = ttk.Combobox(self.f10, width = 27, textvariable = self.subjects6)
+        subjectschoosen7 = ttk.Combobox(self.f10, width = 27, textvariable = self.subjects7)
+        subjectschoosen8 = ttk.Combobox(self.f10, width = 27, textvariable = self.subjects8)
+        
+        
+        #get the lessons with no teacher
+        obj10 = bc.User()
+        sub_data10 =  obj10.choose_sub()
+       
+       
+        subjectschoosen1['values'] = sub_data10
+        subjectschoosen1['state'] = 'readonly'
+        subjectschoosen1.place(x=250,y=10)
+        subjectschoosen1.current()
+        
+        subjectschoosen2['values'] = sub_data10
+        subjectschoosen2['state'] = 'readonly'
+        subjectschoosen2.place(x=250,y=40)
+        subjectschoosen2.current()
+        
+        subjectschoosen3['values'] = sub_data10
+        subjectschoosen3['state'] = 'readonly'
+        subjectschoosen3.place(x=250,y=70)
+        subjectschoosen3.current()
+        
+        subjectschoosen4['values'] = sub_data10
+        subjectschoosen4['state'] = 'readonly'
+        subjectschoosen4.place(x=250,y=100)
+        subjectschoosen4.current()
+        
+        subjectschoosen5['values'] = sub_data10
+        subjectschoosen5['state'] = 'readonly'
+        subjectschoosen5.place(x=250,y=130)
+        subjectschoosen5.current()
+        
+        subjectschoosen6['values'] = sub_data10
+        subjectschoosen6['state'] = 'readonly'
+        subjectschoosen6.place(x=250,y=160)
+        subjectschoosen6.current()
+        
+        subjectschoosen7['values'] = sub_data10
+        subjectschoosen7['state'] = 'readonly'
+        subjectschoosen7.place(x=250,y=190)
+        subjectschoosen7.current()
+        
+        subjectschoosen8['values'] = sub_data10
+        subjectschoosen8['state'] = 'readonly'
+        subjectschoosen8.place(x=250,y=220)
+        subjectschoosen8.current()
+        
+        
+    
+            
+        
+      #buttons
+        obj10 = bc.User()
+        b10=Button(self.f10,text='get',bg='orange' ,fg='black',width=10,bd=3,command=lambda:[self.get_var10(),obj10.update_file([self.sub1,self.sub2,self.sub3,self.sub4,self.sub5,self.sub6,self.sub7,self.sub8,self.sub9,self.sub10,self.sub11,self.sub12,self.sub13,self.sub14,self.sub15],self.input_username2)]).place(x=130,y=430)
+        b_10=Button(self.f10,text='Back',bg='orange' ,fg='black',width=10,bd=3,command=self.rm10).place(x=250,y=430)
+        
+    def get_var10(self):
+        self.sub1 = self.subject1.get()
+        self.sub2 = self.subject2.get()
+        self.sub3 = self.subject3.get()
+        self.sub4 = self.subject4.get()
+        self.sub5 = self.subject5.get()
+        self.sub6 = self.subject6.get()
+        self.sub7 = self.subject7.get()
+        
+        
+        self.sub8 = self.subjects1.get()
+        self.sub9 = self.subjects2.get()
+        self.sub10 = self.subjects3.get()
+        self.sub11 = self.subjects4.get()
+        self.sub12 = self.subjects5.get() 
+        self.sub13 = self.subjects6.get() 
+        self.sub14 = self.subjects7.get()
+        self.sub15 = self.subjects8.get()
+        
+        
+            
+
 #==============================teacherlogout======================================
     def logout4(self):
         self.teacher_win.destroy()
@@ -459,15 +672,313 @@ class ProgramGui:
         l1=Label(self.f4,text='Subject: ',font=('Papyrus 10 bold'),bd=2, fg='orange',bg='black').place(x=20,y=40)
         e1=Entry(self.f4,width=25,bd=5,bg='orange',fg='black',textvariable=self.sid4).place(x=180,y=40)
         b1=Button(self.f4,text='Search',bg='orange',font='Papyrus 10 bold',width=9,bd=2,command=self.serch4).place(x=400,y=37)
-        b1=Button(self.f4,text='Back',bg='orange',font='Papyrus 10 bold',width=10,bd=2,command=self.rm4).place(x=250,y=450)                              
+        b2=Button(self.f4,text='Back',bg='orange',font='Papyrus 10 bold',width=10,bd=2,command=self.rm4).place(x=250,y=450)                              
+                            
+#==============================adminSearchStudent====================================== 
+    def rm13(self):
+        self.f13.destroy()
+
+
+    def serch13(self):
+        input_search13 =self.sid13.get()
+        if input_search13 !="" :
+            self.list13=("NAME","CODE","SUBJECT")
+            self.trees13=self.create_tree2(self.f13,self.list13)
+            self.trees13.place(x=25,y=150)
+            
+            obj13 = bc.User()
+            subject_info13 = obj13.search_num_name(input_search13)
+            for data13 in subject_info13:
+                if (input_search13 == data13[0]) or (input_search13 == data13[1]):
+                    self.trees13.insert('',END,values=(data13[0],data13[1],data13[2]))
+                
+            
+            
+        else:
+            messagebox.showinfo("Error","Data not found")
+
+
+
+
+    def search_student_frame(self):
+        self.sid13 = StringVar()
+        self.f13 = Frame(self.admin_win,height=1300,width=1300,bg='black')
+        self.f13.place(x=450,y=100)
+        l1=Label(self.f13,text='Subject: ',font=('Papyrus 10 bold'),bd=2, fg='orange',bg='black').place(x=20,y=40)
+        e1=Entry(self.f13,width=25,bd=5,bg='orange',fg='black',textvariable=self.sid13).place(x=180,y=40)
+        b1=Button(self.f13,text='Search',bg='orange',font='Papyrus 10 bold',width=9,bd=2,command=self.serch13).place(x=400,y=37)
+        b2=Button(self.f13,text='Back',bg='orange',font='Papyrus 10 bold',width=10,bd=2,command=self.rm13).place(x=250,y=450)  
+                               
+#==============================adminShowStudent======================================
+    def rm14(self):
+        self.f14.destroy()
+
+
+    def show14(self):
+            self.list14=("NAME","CODE")
+            self.trees14=self.create_tree(self.f14,self.list14)
+            self.trees14.place(x=25,y=150)
+            
+            obj14 = bc.User()
+            subject_info14 = obj14.show_student()
+            for data14 in subject_info14:
+                self.trees14.insert('',END,values=(data14[0],data14[1]))
+                
+            
+            
+       
+
+
+
+
+    def show_all_student(self):
+        self.sid14 = StringVar()
+        self.f14 = Frame(self.admin_win,height=500,width=500,bg='black')
+        self.f14.place(x=450,y=100)
+        l1=Label(self.f14,text='Students: ',font=('Papyrus 10 bold'),bd=2, fg='orange',bg='black').place(x=20,y=40)
+        b1=Button(self.f14,text='go',bg='orange',font='Papyrus 10 bold',width=9,bd=2,command=self.show14).place(x=400,y=37)
+        b2=Button(self.f14,text='Back',bg='orange',font='Papyrus 10 bold',width=10,bd=2,command=self.rm14).place(x=250,y=450)                        
+                            
+#==============================AdminSearchStudentbysubject======================================
+    def rm15(self):
+        self.f15.destroy()
+
+
+    def serch15(self):
+        input_search15 =self.sid15.get()
+        if input_search15 !="" :
+            self.list15=("NAME","CODE")
+            self.trees15=self.create_tree(self.f15,self.list15)
+            self.trees15.place(x=25,y=150)
+            
+            obj15 = bc.Admin()
+            subject_info15 = obj15.search_by_sub(input_search15)
+            for data15 in subject_info15:
+                self.trees15.insert('',END,values=(data15[0],data15[1]))
+                
+            
+            
+        else:
+            messagebox.showinfo("Error","Data not found")
+
+
+
+
+    def search_by_sub(self):
+        self.sid15 = StringVar()
+        self.f15 = Frame(self.admin_win,height=600,width=600,bg='black')
+        self.f15.place(x=450,y=100)
+        l1=Label(self.f15,text='Subject: ',font=('Papyrus 10 bold'),bd=2, fg='orange',bg='black').place(x=20,y=40)
+        e1=Entry(self.f15,width=25,bd=5,bg='orange',fg='black',textvariable=self.sid15).place(x=180,y=40)
+        b1=Button(self.f15,text='Search',bg='orange',font='Papyrus 10 bold',width=9,bd=2,command=self.serch15).place(x=400,y=37)
+        b2=Button(self.f15,text='Back',bg='orange',font='Papyrus 10 bold',width=10,bd=2,command=self.rm15).place(x=250,y=450)
                             
                             
-                            
-                            
-                            
-                            
-                            
-                            
+#==============================StudentGETSubject======================================
+    def rm12(self):
+         self.f12.destroy()
+         
+    def choose_sub12(self):
+        self.f12=Frame(self.student_win,height=500,width=500,bg='black')
+        self.f12.place(x = 470,y = 100)
+        # Combobox creation
+        self.subject_1 = tk.StringVar()
+        self.subject_2 = tk.StringVar()
+        self.subject_3 = tk.StringVar()
+        self.subject_4 = tk.StringVar()
+        self.subject_5 = tk.StringVar()
+        self.subject_6 = tk.StringVar()
+        self.subject_7 = tk.StringVar()
+        
+        
+        subject_choosen1 = ttk.Combobox(self.f12, width = 27, textvariable = self.subject_1)
+        subject_choosen2 = ttk.Combobox(self.f12, width = 27, textvariable = self.subject_2)
+        subject_choosen3 = ttk.Combobox(self.f12, width = 27, textvariable = self.subject_3)
+        subject_choosen4 = ttk.Combobox(self.f12, width = 27, textvariable = self.subject_4)
+        subject_choosen5 = ttk.Combobox(self.f12, width = 27, textvariable = self.subject_5)
+        subject_choosen6 = ttk.Combobox(self.f12, width = 27, textvariable = self.subject_6)
+        subject_choosen7 = ttk.Combobox(self.f12, width = 27, textvariable = self.subject_7)
+        
+        
+        #get the lessons with no teacher
+        obj12 = bc.User()
+        sub_data12 =  obj12.choose_sub13()
+       
+       
+        subject_choosen1['values'] = sub_data12
+        subject_choosen1['state'] = 'readonly'
+        subject_choosen1.place(x=20,y=10)
+        subject_choosen1.current()
+        
+        subject_choosen2['values'] = sub_data12
+        subject_choosen2['state'] = 'readonly'
+        subject_choosen2.place(x=20,y=40)
+        subject_choosen2.current()
+        
+        subject_choosen3['values'] = sub_data12
+        subject_choosen3['state'] = 'readonly'
+        subject_choosen3.place(x=20,y=70)
+        subject_choosen3.current()
+        
+        subject_choosen4['values'] = sub_data12
+        subject_choosen4['state'] = 'readonly'
+        subject_choosen4.place(x=20,y=100)
+        subject_choosen4.current()
+        
+        subject_choosen5['values'] = sub_data12
+        subject_choosen5['state'] = 'readonly'
+        subject_choosen5.place(x=20,y=130)
+        subject_choosen5.current()
+        
+        subject_choosen6['values'] = sub_data12
+        subject_choosen6['state'] = 'readonly'
+        subject_choosen6.place(x=20,y=160)
+        subject_choosen6.current()
+        
+        subject_choosen7['values'] = sub_data12
+        subject_choosen7['state'] = 'readonly'
+        subject_choosen7.place(x=20,y=190)
+        subject_choosen7.current()
+        
+        
+        
+        
+        
+        
+        self.subjects_1 = tk.StringVar()
+        self.subjects_2 = tk.StringVar()
+        self.subjects_3 = tk.StringVar()
+        self.subjects_4 = tk.StringVar()
+        self.subjects_5 = tk.StringVar()
+        self.subjects_6 = tk.StringVar()
+        self.subjects_7 = tk.StringVar()
+        self.subjects_8 = tk.StringVar()
+        
+        
+        
+        subjects_choosen1 = ttk.Combobox(self.f12, width = 27, textvariable = self.subjects_1)
+        subjects_choosen2 = ttk.Combobox(self.f12, width = 27, textvariable = self.subjects_2)
+        subjects_choosen3 = ttk.Combobox(self.f12, width = 27, textvariable = self.subjects_3)
+        subjects_choosen4 = ttk.Combobox(self.f12, width = 27, textvariable = self.subjects_4)
+        subjects_choosen5 = ttk.Combobox(self.f12, width = 27, textvariable = self.subjects_5)
+        subjects_choosen6 = ttk.Combobox(self.f12, width = 27, textvariable = self.subjects_6)
+        subjects_choosen7 = ttk.Combobox(self.f12, width = 27, textvariable = self.subjects_7)
+        subjects_choosen8 = ttk.Combobox(self.f12, width = 27, textvariable = self.subjects_8)
+        
+        
+        #get the lessons with no teacher
+        obj12 = bc.User()
+        sub_data12 =  obj12.choose_sub13()
+       
+       
+        subjects_choosen1['values'] = sub_data12
+        subjects_choosen1['state'] = 'readonly'
+        subjects_choosen1.place(x=250,y=10)
+        subjects_choosen1.current()
+        
+        subjects_choosen2['values'] = sub_data12
+        subjects_choosen2['state'] = 'readonly'
+        subjects_choosen2.place(x=250,y=40)
+        subjects_choosen2.current()
+        
+        subjects_choosen3['values'] = sub_data12
+        subjects_choosen3['state'] = 'readonly'
+        subjects_choosen3.place(x=250,y=70)
+        subjects_choosen3.current()
+        
+        subjects_choosen4['values'] = sub_data12
+        subjects_choosen4['state'] = 'readonly'
+        subjects_choosen4.place(x=250,y=100)
+        subjects_choosen4.current()
+        
+        subjects_choosen5['values'] = sub_data12
+        subjects_choosen5['state'] = 'readonly'
+        subjects_choosen5.place(x=250,y=130)
+        subjects_choosen5.current()
+        
+        subjects_choosen6['values'] = sub_data12
+        subjects_choosen6['state'] = 'readonly'
+        subjects_choosen6.place(x=250,y=160)
+        subjects_choosen6.current()
+        
+        subjects_choosen7['values'] = sub_data12
+        subjects_choosen7['state'] = 'readonly'
+        subjects_choosen7.place(x=250,y=190)
+        subjects_choosen7.current()
+        
+        subjects_choosen8['values'] = sub_data12
+        subjects_choosen8['state'] = 'readonly'
+        subjects_choosen8.place(x=250,y=220)
+        subjects_choosen8.current()
+        
+        
+    
+            
+        
+      #buttons
+        obj12 = bc.User()
+        b12=Button(self.f12,text='get',bg='orange' ,fg='black',width=10,bd=3,command=lambda:[self.get_var12(),obj12.choose_sub12([self.sub_1,self.sub_2,self.sub_3,self.sub_4,self.sub_5,self.sub_6,self.sub_7,self.sub_8,self.sub_9,self.sub_10,self.sub_11,self.sub_12,self.sub_13,self.sub_14,self.sub_15],self.input_username2)]).place(x=130,y=430)
+        b_12=Button(self.f12,text='Back',bg='orange' ,fg='black',width=10,bd=3,command=self.rm12).place(x=250,y=430)
+        self.student_name = self.input_username2
+        
+    def get_var12(self):
+        self.sub_1 = self.subject_1.get()
+        self.sub_2 = self.subject_2.get()
+        self.sub_3 = self.subject_3.get()
+        self.sub_4 = self.subject_4.get()
+        self.sub_5 = self.subject_5.get()
+        self.sub_6 = self.subject_6.get()
+        self.sub_7 = self.subject_7.get()
+        
+        
+        self.sub_8 = self.subjects_1.get()
+        self.sub_9 = self.subjects_2.get()
+        self.sub_10 = self.subjects_3.get()
+        self.sub_11 = self.subjects_4.get()
+        self.sub_12 = self.subjects_5.get() 
+        self.sub_13 = self.subjects_6.get() 
+        self.sub_14 = self.subjects_7.get()
+        self.sub_15 = self.subjects_8.get()
+        
+        self.sub_list = [self.sub_1,self.sub_2,self.sub_3,self.sub_4,self.sub_5,self.sub_6,self.sub_7,self.sub_8,self.sub_9,self.sub_10,self.sub_11,self.sub_12,self.sub_13,self.sub_14,self.sub_15]
+        
+                         
+#==============================StudentSendsubToAdmin======================================
+    def rm12(self):
+        self.f12.destroy()
+
+    def send_sub12(self):
+        self.sid12 = StringVar()
+        self.f12=Frame(self.admin_win,height=1000,width=1000,bg='black')
+        self.f12.place(x=470,y=100)
+        self.list12 = ("NAME","SUBJECTS")
+        self.treess12=self.create_tree2(self.f12,self.list12)
+        self.treess12.place(x=40,y=100)
+        
+        obj12 = bc.User()
+        obj_12 = bc.Admin()
+        subject_info12 = obj12.get_tree_data14()
+        for data12 in subject_info12:
+            self.treess12.insert('',END,values=(data12[0],data12[1]))
+            
+            
+        l2=Label(self.f12,text='enter name of student: ',font=('Papyrus 10 bold'),bd=2, fg='orange',bg='black').place(x=20,y=500)
+        e2=Entry(self.f12,width=25,bd=5,bg='orange',fg='black',textvariable=self.sid12).place(x=200,y=500)
+        b2=Button(self.f12,text='accept',bg='green',fg= 'white',font='Papyrus 10 bold',width=9,bd=2,command = lambda:[self.get_var13(),obj_12.accept(self.input_search12)]).place(x=150,y=600)
+        b3=Button(self.f12,text='deny',bg='red',fg='white',font='Papyrus 10 bold',width=10,bd=2,command = lambda:[self.get_var14(),obj_12.deny(self.input_search12)]).place(x=300,y=600)
+        b4=Button(self.f12,text='back',bg='orange',fg='black',font='Papyrus 10 bold',width=10,bd=2,command = self.rm12).place(x=450,y=600)
+    
+    def get_var13(self):
+         self.input_search12 = self.sid12.get()
+    def get_var14(self):
+         self.input_search12 = self.sid12.get()
+        
+        
+        
+        
+
+    
+                           
                     
 #==============================studentlogout======================================
     def logout(self):
@@ -486,7 +997,7 @@ class ProgramGui:
         self.f3=Frame(self.student_win,height=500,width=500,bg='black')
         self.f3.place(x=470,y=100)
         b1=Button(self.f3,text='Back',bg='orange' ,fg='black',width=10,bd=3,command=self.rm3).place(x=250,y=400)
-        self.list3 = ("SUBJECT","TEACHER","UNIT")
+        self.list3 = ("SUBJECT","TEACHER","UNIT","CAPACITY")
         self.treess3 = self.create_tree(self.f3,self.list3)
         self.treess3.place(x=25,y=50)
         
@@ -505,7 +1016,7 @@ class ProgramGui:
     def serch2(self):
         input_search2 =self.sid2.get()
         if input_search2 !="" :
-            self.list2 = ("SUBJECT","TEACHER","UNIT")
+            self.list2 = ("SUBJECT","TEACHER","UNIT","CAPACITY")
             self.trees2 = self.create_tree(self.f2,self.list2)
             self.trees2.place(x=25,y=150)
             
@@ -585,6 +1096,17 @@ class ProgramGui:
             n=n+1
         return self.tree
     
+    def create_tree2(self,plc,lists):
+        self.tree=ttk.Treeview(plc,height=13,column=(lists),show='headings')
+        n=0
+        while n is not len(lists):
+            self.tree.heading("#"+str(n+1),text=lists[n])
+            self.tree.column(""+lists[n],width=400)
+            n=n+1
+        return self.tree
+    
+    
+    
          
         
 
@@ -602,6 +1124,5 @@ class ProgramGui:
 
 
 
-obj=ProgramGui()
-obj.mainloop()
+
     
